@@ -11,10 +11,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import { 
   Calendar as CalendarIcon, 
   Clock, 
-  Video, 
   MapPin,
   Heart,
   Brain,
@@ -22,9 +22,24 @@ import {
   Baby,
   Eye,
   Bone,
-  Users
+  CheckCircle,
+  User,
+  Phone as PhoneIcon
 } from "lucide-react";
 import { toast } from "sonner";
+
+interface Appointment {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  specialty: string;
+  date: string;
+  time: string;
+  message: string;
+  status: "pending" | "completed";
+  bookedAt: Date;
+}
 
 const Appointments = () => {
   const [formData, setFormData] = useState({
@@ -34,9 +49,10 @@ const Appointments = () => {
     specialty: "",
     date: "",
     time: "",
-    type: "",
     message: ""
   });
+
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
 
   const doctors = [
     {
@@ -98,12 +114,19 @@ const Appointments = () => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.name || !formData.email || !formData.phone || !formData.specialty || !formData.date || !formData.time || !formData.type) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.specialty || !formData.date || !formData.time) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    // Success message
+    const newAppointment: Appointment = {
+      id: Date.now().toString(),
+      ...formData,
+      status: "pending",
+      bookedAt: new Date()
+    };
+
+    setAppointments(prev => [newAppointment, ...prev]);
     toast.success("Appointment booked successfully! We'll send you a confirmation shortly.");
     
     // Reset form
@@ -114,10 +137,35 @@ const Appointments = () => {
       specialty: "",
       date: "",
       time: "",
-      type: "",
       message: ""
     });
   };
+
+  const handleCompleteAppointment = (id: string) => {
+    setAppointments(prev => 
+      prev.map(apt => 
+        apt.id === id ? { ...apt, status: "completed" as const } : apt
+      )
+    );
+    toast.success("Appointment marked as completed!");
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-IN', { 
+      weekday: 'short',
+      day: 'numeric', 
+      month: 'short', 
+      year: 'numeric' 
+    });
+  };
+
+  const sortedAppointments = [...appointments].sort((a, b) => {
+    // Sort by date and time
+    const dateA = new Date(`${a.date}T${a.time}`);
+    const dateB = new Date(`${b.date}T${b.time}`);
+    return dateB.getTime() - dateA.getTime();
+  });
 
   return (
     <div className="min-h-screen py-12">
@@ -128,7 +176,7 @@ const Appointments = () => {
             Book Your <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Appointment</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Schedule a consultation with our expert doctors. Choose between online video consultation or in-clinic visit.
+            Schedule a consultation with our expert doctors at our clinic for personalized care.
           </p>
         </div>
 
@@ -138,7 +186,7 @@ const Appointments = () => {
             <Card className="shadow-medium animate-slide-up">
               <CardHeader>
                 <CardTitle>Appointment Details</CardTitle>
-                <CardDescription>Fill in your details to book an appointment</CardDescription>
+                <CardDescription>Fill in your details to book an in-clinic appointment</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -169,7 +217,7 @@ const Appointments = () => {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+1 (234) 567-8900"
+                      placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
@@ -211,29 +259,6 @@ const Appointments = () => {
                         onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                       />
                     </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="type">Appointment Type *</Label>
-                    <Select value={formData.type} onValueChange={(value) => setFormData({ ...formData, type: value })}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select appointment type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="online">
-                          <div className="flex items-center gap-2">
-                            <Video className="w-4 h-4" />
-                            Online Consultation
-                          </div>
-                        </SelectItem>
-                        <SelectItem value="clinic">
-                          <div className="flex items-center gap-2">
-                            <MapPin className="w-4 h-4" />
-                            In-Clinic Visit
-                          </div>
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
                   </div>
 
                   <div className="space-y-2">
@@ -281,24 +306,7 @@ const Appointments = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-primary text-primary-foreground shadow-medium animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <CardContent className="p-6 space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-primary-foreground/20 rounded-full flex items-center justify-center">
-                    <Video className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">Online Consultations</h3>
-                    <p className="text-sm opacity-90">Available 24/7</p>
-                  </div>
-                </div>
-                <p className="text-sm opacity-90">
-                  Get instant access to our doctors through secure video consultations from anywhere.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-accent/10 border-accent/20 shadow-medium animate-slide-up" style={{ animationDelay: "0.3s" }}>
+            <Card className="bg-accent/10 border-accent/20 shadow-medium animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <CardContent className="p-6 space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-accent/20 rounded-full flex items-center justify-center">
@@ -316,6 +324,93 @@ const Appointments = () => {
             </Card>
           </div>
         </div>
+
+        {/* Booked Appointments History */}
+        {appointments.length > 0 && (
+          <div className="mt-16">
+            <div className="text-center mb-8 animate-fade-in">
+              <h2 className="text-3xl font-bold mb-4">Booked Appointments</h2>
+              <p className="text-muted-foreground">
+                View and manage your appointment history
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {sortedAppointments.map((appointment, index) => (
+                <Card 
+                  key={appointment.id}
+                  className={`shadow-medium transition-all duration-300 hover:-translate-y-1 animate-slide-up ${
+                    appointment.status === "completed" ? "bg-accent/5 border-accent/30" : "border-border"
+                  }`}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <Badge 
+                        variant={appointment.status === "completed" ? "secondary" : "default"}
+                        className={appointment.status === "completed" ? "bg-accent/20 text-accent" : ""}
+                      >
+                        {appointment.status === "completed" ? (
+                          <><CheckCircle className="w-3 h-3 mr-1" /> Completed</>
+                        ) : (
+                          "Pending"
+                        )}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        #{appointment.id.slice(-6)}
+                      </span>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2">
+                        <User className="w-4 h-4 text-primary" />
+                        <span className="font-semibold">{appointment.name}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <PhoneIcon className="w-4 h-4" />
+                        <span>{appointment.phone}</span>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-sm">
+                        <Stethoscope className="w-4 h-4 text-primary" />
+                        <span className="font-medium text-primary">{appointment.specialty}</span>
+                      </div>
+
+                      <div className="flex items-center gap-4 pt-2 border-t border-border">
+                        <div className="flex items-center gap-2 text-sm">
+                          <CalendarIcon className="w-4 h-4 text-muted-foreground" />
+                          <span>{formatDate(appointment.date)}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm">
+                          <Clock className="w-4 h-4 text-muted-foreground" />
+                          <span>{appointment.time}</span>
+                        </div>
+                      </div>
+
+                      {appointment.message && (
+                        <p className="text-sm text-muted-foreground pt-2 border-t border-border">
+                          {appointment.message}
+                        </p>
+                      )}
+                    </div>
+
+                    {appointment.status === "pending" && (
+                      <Button 
+                        onClick={() => handleCompleteAppointment(appointment.id)}
+                        className="w-full mt-4"
+                        variant="outline"
+                      >
+                        <CheckCircle className="w-4 h-4 mr-2" />
+                        Mark as Complete
+                      </Button>
+                    )}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Our Doctors Section */}
         <div className="mt-20">
