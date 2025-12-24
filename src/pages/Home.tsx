@@ -3,14 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   Calendar, 
-  ShoppingBag, 
   Clock, 
   Shield, 
   Award, 
   Headphones,
   Star,
   MessageCircle,
-  ArrowRight
+  ArrowRight,
+  ClipboardList
 } from "lucide-react";
 import heroImage from "@/assets/hero-doctors.jpg";
 
@@ -28,33 +28,33 @@ const Home = () => {
     },
     {
       icon: Award,
-      title: "Verified Medicines",
-      description: "100% genuine medicines from licensed pharmaceutical companies"
+      title: "Quality Care",
+      description: "Highest standards of medical care with compassion"
     },
     {
       icon: Headphones,
-      title: "Online Consultations",
-      description: "Consult with doctors from the comfort of your home"
+      title: "Easy Booking",
+      description: "Book appointments easily at our clinic"
     }
   ];
 
   const testimonials = [
     {
-      name: "Sarah Johnson",
+      name: "Priya Sharma",
       role: "Patient",
-      content: "Excellent service! The doctors are very professional and the medicine delivery was super fast. Highly recommended!",
+      content: "Excellent service! The doctors are very professional and caring. Highly recommended!",
       rating: 5
     },
     {
-      name: "Michael Chen",
+      name: "Amit Patel",
       role: "Patient",
-      content: "The online consultation feature is amazing. I got expert medical advice without leaving my home. Very convenient!",
+      content: "The clinic is well-maintained and the staff is very helpful. Great experience overall!",
       rating: 5
     },
     {
-      name: "Emily Davis",
+      name: "Sunita Gupta",
       role: "Patient",
-      content: "Great experience with the pharmacy. Genuine medicines at reasonable prices with quick delivery. Will use again!",
+      content: "Very satisfied with the treatment. The doctors take time to listen and explain everything clearly.",
       rating: 5
     }
   ];
@@ -72,11 +72,11 @@ const Home = () => {
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
                 Professional Healthcare{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                  At Your Doorstep
+                  At Your Service
                 </span>
               </h1>
               <p className="text-lg text-muted-foreground">
-                Book appointments with certified doctors and get genuine medicines delivered. 
+                Book appointments with certified doctors and get quality healthcare. 
                 Your complete healthcare solution in one place.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -88,9 +88,9 @@ const Home = () => {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="group">
-                  <Link to="/pharmacy">
-                    <ShoppingBag className="w-5 h-5 mr-2" />
-                    Order Medicines
+                  <Link to="/appointment-history">
+                    <ClipboardList className="w-5 h-5 mr-2" />
+                    View History
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </Button>
@@ -102,7 +102,7 @@ const Home = () => {
                 </div>
                 <div className="h-12 w-px bg-border" />
                 <div>
-                  <div className="text-3xl font-bold text-accent">50+</div>
+                  <div className="text-3xl font-bold text-accent">10+</div>
                   <div className="text-sm text-muted-foreground">Expert Doctors</div>
                 </div>
                 <div className="h-12 w-px bg-border" />
@@ -162,7 +162,7 @@ const Home = () => {
                 Complete Healthcare Services
               </h2>
               <p className="text-muted-foreground">
-                From online consultations to medicine delivery, we offer a complete range of healthcare services to meet all your medical needs.
+                We offer a complete range of healthcare services to meet all your medical needs.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
@@ -172,7 +172,7 @@ const Home = () => {
                   <div>
                     <h4 className="font-semibold mb-1">Expert Medical Consultations</h4>
                     <p className="text-sm text-muted-foreground">
-                      Connect with experienced doctors through video or in-person consultations
+                      Connect with experienced doctors through in-person consultations
                     </p>
                   </div>
                 </li>
@@ -181,9 +181,9 @@ const Home = () => {
                     <div className="w-2 h-2 bg-accent rounded-full" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Prescription Medicine Delivery</h4>
+                    <h4 className="font-semibold mb-1">Comprehensive Health Checkups</h4>
                     <p className="text-sm text-muted-foreground">
-                      Order your medicines online and get them delivered to your doorstep
+                      Regular health checkups and preventive care for your well-being
                     </p>
                   </div>
                 </li>
@@ -194,7 +194,7 @@ const Home = () => {
                   <div>
                     <h4 className="font-semibold mb-1">Health Monitoring & Follow-ups</h4>
                     <p className="text-sm text-muted-foreground">
-                      Regular health checkups and follow-up consultations for ongoing care
+                      Regular follow-up consultations for ongoing care
                     </p>
                   </div>
                 </li>
@@ -205,12 +205,12 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-2 gap-4 animate-scale-in">
               <Card className="p-6 text-center bg-primary/5 border-primary/20">
-                <div className="text-4xl font-bold text-primary mb-2">1000+</div>
-                <div className="text-sm text-muted-foreground">Medicines Available</div>
+                <div className="text-4xl font-bold text-primary mb-2">98%</div>
+                <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
               </Card>
               <Card className="p-6 text-center bg-accent/5 border-accent/20">
-                <div className="text-4xl font-bold text-accent mb-2">98%</div>
-                <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
+                <div className="text-4xl font-bold text-accent mb-2">10+</div>
+                <div className="text-sm text-muted-foreground">Expert Doctors</div>
               </Card>
               <Card className="p-6 text-center bg-accent/5 border-accent/20">
                 <div className="text-4xl font-bold text-accent mb-2">30min</div>
@@ -265,7 +265,7 @@ const Home = () => {
           <div className="max-w-3xl mx-auto space-y-6 animate-fade-in">
             <h2 className="text-4xl font-bold">Ready to Take Care of Your Health?</h2>
             <p className="text-lg opacity-90">
-              Book an appointment with our expert doctors or order your medicines online today
+              Book an appointment with our expert doctors today
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary">
@@ -275,9 +275,9 @@ const Home = () => {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                <Link to="/pharmacy">
-                  <ShoppingBag className="w-5 h-5 mr-2" />
-                  Visit Pharmacy
+                <Link to="/appointment-history">
+                  <ClipboardList className="w-5 h-5 mr-2" />
+                  View History
                 </Link>
               </Button>
             </div>
@@ -287,7 +287,7 @@ const Home = () => {
 
       {/* WhatsApp Float Button */}
       <a
-        href="https://wa.me/1234567890"
+        href="https://wa.me/917708987656"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 w-14 h-14 bg-accent rounded-full flex items-center justify-center shadow-large hover:scale-110 transition-transform z-50"

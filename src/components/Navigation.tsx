@@ -9,7 +9,7 @@ const Navigation = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Book Appointment", path: "/appointments" },
-    { name: "Pharmacy", path: "/pharmacy" },
+    { name: "Appointment History", path: "/appointment-history" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
@@ -43,9 +43,9 @@ const Navigation = () => {
 
           {/* Emergency Contact */}
           <div className="hidden md:flex items-center gap-4">
-            <a href="tel:+1234567890" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <a href="tel:+917708987656" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
               <Phone className="w-4 h-4" />
-              <span className="font-semibold">Emergency: +123-456-7890</span>
+              <span className="font-semibold">Emergency: +91 7708987656</span>
             </a>
             <Button asChild size="sm">
               <Link to="/appointments">Book Now</Link>
@@ -75,9 +75,9 @@ const Navigation = () => {
                   {link.name}
                 </Link>
               ))}
-              <a href="tel:+1234567890" className="flex items-center gap-2 text-sm text-muted-foreground py-2">
+              <a href="tel:+917708987656" className="flex items-center gap-2 text-sm text-muted-foreground py-2">
                 <Phone className="w-4 h-4" />
-                <span>Emergency: +123-456-7890</span>
+                <span>Emergency: +91 7708987656</span>
               </a>
               <Button asChild className="w-full">
                 <Link to="/appointments">Book Appointment</Link>
