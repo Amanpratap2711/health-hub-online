@@ -11,12 +11,12 @@ const About = () => {
     {
       icon: Award,
       title: "Excellence",
-      description: "We maintain the highest standards in medical care with certified professionals and genuine medicines."
+      description: "We maintain the highest standards in medical care with certified professionals."
     },
     {
       icon: Users,
       title: "Accessibility",
-      description: "Making quality healthcare accessible to everyone through online consultations and home delivery."
+      description: "Making quality healthcare accessible to everyone through our clinic in Kalyan East."
     },
     {
       icon: Clock,
@@ -26,30 +26,30 @@ const About = () => {
   ];
 
   const stats = [
-    { label: "Years of Experience", value: "15+" },
-    { label: "Happy Patients", value: "10,000+" },
-    { label: "Expert Doctors", value: "50+" },
-    { label: "Medicines Available", value: "5,000+" }
+    { label: "Years of Experience", value: "5+" },
+    { label: "Happy Patients", value: "500+" },
+    { label: "Expert Doctors", value: "10+" },
+    { label: "Services Available", value: "20+" }
   ];
 
   const team = [
     {
-      name: "Dr. Sarah Williams",
+      name: "Dr. Suresh Sharma",
       role: "Chief Medical Officer",
       specialty: "Internal Medicine"
     },
     {
-      name: "Dr. Michael Chen",
+      name: "Dr. Priya Patel",
       role: "Head of Cardiology",
       specialty: "Cardiology"
     },
     {
-      name: "Dr. Emily Rodriguez",
+      name: "Dr. Anjali Gupta",
       role: "Pediatrics Lead",
       specialty: "Pediatrics"
     },
     {
-      name: "John Anderson",
+      name: "Rajesh Deshmukh",
       role: "Chief Pharmacist",
       specialty: "Pharmaceutical Sciences"
     }
@@ -64,7 +64,7 @@ const About = () => {
             About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">HealthCare+</span>
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
-            Your trusted partner in healthcare, committed to providing quality medical services and genuine medicines with compassion and expertise.
+            Your trusted partner in healthcare, committed to providing quality medical services with compassion and expertise.
           </p>
         </div>
 
@@ -95,7 +95,7 @@ const About = () => {
               </div>
               <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
               <p className="text-muted-foreground leading-relaxed">
-                To provide accessible, affordable, and high-quality healthcare services to everyone. We aim to bridge the gap between patients and healthcare providers through innovative technology and compassionate care, ensuring that quality medical assistance is just a click away.
+                To provide accessible, affordable, and high-quality healthcare services to everyone. We aim to bridge the gap between patients and healthcare providers through compassionate care, ensuring that quality medical assistance is always available.
               </p>
             </CardContent>
           </Card>
@@ -107,7 +107,7 @@ const About = () => {
               </div>
               <h2 className="text-2xl font-bold mb-4">Our Vision</h2>
               <p className="text-muted-foreground leading-relaxed">
-                To become the most trusted healthcare platform, revolutionizing how people access medical services and medicines. We envision a future where quality healthcare is available to everyone, regardless of their location, ensuring better health outcomes for communities worldwide.
+                To become the most trusted healthcare provider in Kalyan and Thane region, revolutionizing how people access medical services. We envision a future where quality healthcare is available to everyone, ensuring better health outcomes for our community.
               </p>
             </CardContent>
           </Card>
@@ -119,13 +119,13 @@ const About = () => {
           <Card className="max-w-4xl mx-auto">
             <CardContent className="p-8">
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Founded in 2009, HealthCare+ began with a simple mission: to make quality healthcare accessible to everyone. What started as a small clinic with a handful of dedicated healthcare professionals has grown into a comprehensive healthcare platform serving thousands of patients.
+                Founded with a simple mission: to make quality healthcare accessible to everyone in Kalyan East and surrounding areas. What started as a small clinic with a handful of dedicated healthcare professionals has grown into a trusted healthcare center serving hundreds of patients.
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Over the years, we've embraced technology to enhance our services, introducing online consultations, home medicine delivery, and 24/7 medical support. Our team of experienced doctors, nurses, and pharmacists work tirelessly to ensure every patient receives the care they deserve.
+                Our team of experienced doctors, nurses, and staff work tirelessly to ensure every patient receives the care they deserve. We combine the warmth of personal care with modern medical practices.
               </p>
               <p className="text-muted-foreground leading-relaxed">
-                Today, we're proud to be at the forefront of digital healthcare, combining the warmth of personal care with the convenience of modern technology. Our commitment to excellence and patient satisfaction drives everything we do.
+                Today, we're proud to be a trusted healthcare provider in our community. Our commitment to excellence and patient satisfaction drives everything we do.
               </p>
             </CardContent>
           </Card>
@@ -181,7 +181,7 @@ const About = () => {
           <CardContent className="p-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Certified & Accredited</h2>
             <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Our healthcare facility and online pharmacy are fully licensed and accredited by relevant health authorities. 
+              Our healthcare facility is fully licensed and accredited by relevant health authorities. 
               All our doctors are board-certified professionals with extensive experience in their respective fields.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -189,7 +189,7 @@ const About = () => {
                 <p className="text-sm font-semibold text-primary">Medical Board Certified</p>
               </div>
               <div className="px-6 py-3 bg-accent/10 rounded-lg">
-                <p className="text-sm font-semibold text-accent">Licensed Pharmacy</p>
+                <p className="text-sm font-semibold text-accent">Licensed Healthcare</p>
               </div>
               <div className="px-6 py-3 bg-primary/10 rounded-lg">
                 <p className="text-sm font-semibold text-primary">ISO Certified</p>

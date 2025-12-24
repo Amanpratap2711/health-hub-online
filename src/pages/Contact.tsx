@@ -39,12 +39,12 @@ const Contact = () => {
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["123 Medical Plaza", "Health Street, City 12345"]
+      details: ["Kalyan East, Thane", "Maharashtra 421306"]
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["Main: +123-456-7890", "Emergency: +123-456-7891"]
+      details: ["Main: +91 7708987656", "Emergency: +91 7708987656"]
     },
     {
       icon: Mail,
@@ -85,7 +85,7 @@ const Contact = () => {
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
-                        placeholder="John Doe"
+                        placeholder="राजेश शर्मा"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
@@ -95,7 +95,7 @@ const Contact = () => {
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder="rajesh@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
@@ -108,7 +108,7 @@ const Contact = () => {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="+1 (234) 567-8900"
+                        placeholder="+91 7708987656"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       />
@@ -183,10 +183,10 @@ const Contact = () => {
                       For medical emergencies, call our 24/7 helpline
                     </p>
                     <a 
-                      href="tel:+1234567891" 
+                      href="tel:+917708987656" 
                       className="text-lg font-bold text-destructive hover:underline"
                     >
-                      +123-456-7891
+                      +91 7708987656
                     </a>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ const Contact = () => {
                       Chat with us instantly on WhatsApp
                     </p>
                     <Button asChild variant="outline" size="sm" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
-                      <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+                      <a href="https://wa.me/917708987656" target="_blank" rel="noopener noreferrer">
                         <MessageCircle className="w-4 h-4 mr-2" />
                         Chat Now
                       </a>
@@ -229,7 +229,7 @@ const Contact = () => {
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="Clinic Location - Kalyan East"
+              title="Clinic Location - Kalyan East, Thane"
               className="w-full h-96"
             ></iframe>
           </CardContent>

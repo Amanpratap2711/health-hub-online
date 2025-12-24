@@ -11,7 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
 import { 
   Calendar as CalendarIcon, 
   Clock, 
@@ -21,25 +20,9 @@ import {
   Stethoscope,
   Baby,
   Eye,
-  Bone,
-  CheckCircle,
-  User,
-  Phone as PhoneIcon
+  Bone
 } from "lucide-react";
 import { toast } from "sonner";
-
-interface Appointment {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  specialty: string;
-  date: string;
-  time: string;
-  message: string;
-  status: "pending" | "completed";
-  bookedAt: Date;
-}
 
 const Appointments = () => {
   const [formData, setFormData] = useState({
@@ -52,48 +35,46 @@ const Appointments = () => {
     message: ""
   });
 
-  const [appointments, setAppointments] = useState<Appointment[]>([]);
-
   const doctors = [
     {
-      name: "Dr. Sarah Williams",
+      name: "Dr. Suresh Sharma",
       specialty: "General Physician",
-      experience: "15 years",
+      experience: "5 years",
       icon: Stethoscope,
       available: "Mon - Sat"
     },
     {
-      name: "Dr. Michael Chen",
+      name: "Dr. Priya Patel",
       specialty: "Cardiologist",
-      experience: "12 years",
+      experience: "4 years",
       icon: Heart,
       available: "Mon - Fri"
     },
     {
-      name: "Dr. Emily Rodriguez",
+      name: "Dr. Anjali Gupta",
       specialty: "Pediatrician",
-      experience: "10 years",
+      experience: "3 years",
       icon: Baby,
       available: "Tue - Sat"
     },
     {
-      name: "Dr. James Anderson",
+      name: "Dr. Rajesh Kumar",
       specialty: "Neurologist",
-      experience: "18 years",
+      experience: "6 years",
       icon: Brain,
       available: "Mon - Wed"
     },
     {
-      name: "Dr. Lisa Thompson",
+      name: "Dr. Meera Deshmukh",
       specialty: "Ophthalmologist",
-      experience: "14 years",
+      experience: "4 years",
       icon: Eye,
       available: "Mon - Sat"
     },
     {
-      name: "Dr. Robert Kumar",
+      name: "Dr. Arun Joshi",
       specialty: "Orthopedist",
-      experience: "16 years",
+      experience: "5 years",
       icon: Bone,
       available: "Wed - Sun"
     }
@@ -113,23 +94,13 @@ const Appointments = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic validation
     if (!formData.name || !formData.email || !formData.phone || !formData.specialty || !formData.date || !formData.time) {
       toast.error("Please fill in all required fields");
       return;
     }
 
-    const newAppointment: Appointment = {
-      id: Date.now().toString(),
-      ...formData,
-      status: "pending",
-      bookedAt: new Date()
-    };
-
-    setAppointments(prev => [newAppointment, ...prev]);
     toast.success("Appointment booked successfully! We'll send you a confirmation shortly.");
     
-    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -140,32 +111,6 @@ const Appointments = () => {
       message: ""
     });
   };
-
-  const handleCompleteAppointment = (id: string) => {
-    setAppointments(prev => 
-      prev.map(apt => 
-        apt.id === id ? { ...apt, status: "completed" as const } : apt
-      )
-    );
-    toast.success("Appointment marked as completed!");
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-IN', { 
-      weekday: 'short',
-      day: 'numeric', 
-      month: 'short', 
-      year: 'numeric' 
-    });
-  };
-
-  const sortedAppointments = [...appointments].sort((a, b) => {
-    // Sort by date and time
-    const dateA = new Date(`${a.date}T${a.time}`);
-    const dateB = new Date(`${b.date}T${b.time}`);
-    return dateB.getTime() - dateA.getTime();
-  });
 
   return (
     <div className="min-h-screen py-12">
@@ -195,7 +140,7 @@ const Appointments = () => {
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
-                        placeholder="John Doe"
+                        placeholder="राजेश शर्मा"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
@@ -205,7 +150,7 @@ const Appointments = () => {
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder="rajesh@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       />
@@ -217,7 +162,7 @@ const Appointments = () => {
                     <Input
                       id="phone"
                       type="tel"
-                      placeholder="+91 98765 43210"
+                      placeholder="+91 7708987656"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     />
@@ -314,7 +259,7 @@ const Appointments = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold">In-Clinic Visits</h3>
-                    <p className="text-sm text-muted-foreground">Personalized Care</p>
+                    <p className="text-sm text-muted-foreground">Kalyan East, Thane</p>
                   </div>
                 </div>
                 <p className="text-sm text-muted-foreground">
@@ -324,93 +269,6 @@ const Appointments = () => {
             </Card>
           </div>
         </div>
-
-        {/* Booked Appointments History */}
-        {appointments.length > 0 && (
-          <div className="mt-16">
-            <div className="text-center mb-8 animate-fade-in">
-              <h2 className="text-3xl font-bold mb-4">Booked Appointments</h2>
-              <p className="text-muted-foreground">
-                View and manage your appointment history
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedAppointments.map((appointment, index) => (
-                <Card 
-                  key={appointment.id}
-                  className={`shadow-medium transition-all duration-300 hover:-translate-y-1 animate-slide-up ${
-                    appointment.status === "completed" ? "bg-accent/5 border-accent/30" : "border-border"
-                  }`}
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <Badge 
-                        variant={appointment.status === "completed" ? "secondary" : "default"}
-                        className={appointment.status === "completed" ? "bg-accent/20 text-accent" : ""}
-                      >
-                        {appointment.status === "completed" ? (
-                          <><CheckCircle className="w-3 h-3 mr-1" /> Completed</>
-                        ) : (
-                          "Pending"
-                        )}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        #{appointment.id.slice(-6)}
-                      </span>
-                    </div>
-
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2">
-                        <User className="w-4 h-4 text-primary" />
-                        <span className="font-semibold">{appointment.name}</span>
-                      </div>
-                      
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <PhoneIcon className="w-4 h-4" />
-                        <span>{appointment.phone}</span>
-                      </div>
-
-                      <div className="flex items-center gap-2 text-sm">
-                        <Stethoscope className="w-4 h-4 text-primary" />
-                        <span className="font-medium text-primary">{appointment.specialty}</span>
-                      </div>
-
-                      <div className="flex items-center gap-4 pt-2 border-t border-border">
-                        <div className="flex items-center gap-2 text-sm">
-                          <CalendarIcon className="w-4 h-4 text-muted-foreground" />
-                          <span>{formatDate(appointment.date)}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-sm">
-                          <Clock className="w-4 h-4 text-muted-foreground" />
-                          <span>{appointment.time}</span>
-                        </div>
-                      </div>
-
-                      {appointment.message && (
-                        <p className="text-sm text-muted-foreground pt-2 border-t border-border">
-                          {appointment.message}
-                        </p>
-                      )}
-                    </div>
-
-                    {appointment.status === "pending" && (
-                      <Button 
-                        onClick={() => handleCompleteAppointment(appointment.id)}
-                        className="w-full mt-4"
-                        variant="outline"
-                      >
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Mark as Complete
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Our Doctors Section */}
         <div className="mt-20">

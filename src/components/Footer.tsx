@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Heart, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Heart, Mail, Phone, MapPin } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -17,22 +17,8 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Your trusted partner in healthcare. Quality medical services and genuine medicines delivered to your doorstep.
+              Your trusted partner in healthcare. Quality medical services delivered with care and compassion.
             </p>
-            <div className="flex gap-3">
-              <a href="#" className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                <Facebook className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                <Instagram className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
           {/* Quick Links */}
@@ -50,8 +36,8 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/pharmacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Online Pharmacy
+                <Link to="/appointment-history" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Appointment History
                 </Link>
               </li>
               <li>
@@ -66,9 +52,7 @@ const Footer = () => {
           <div>
             <h3 className="font-semibold text-foreground mb-4">Our Services</h3>
             <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground">Online Consultations</li>
               <li className="text-sm text-muted-foreground">In-Clinic Appointments</li>
-              <li className="text-sm text-muted-foreground">Medicine Delivery</li>
               <li className="text-sm text-muted-foreground">Health Checkups</li>
               <li className="text-sm text-muted-foreground">24/7 Support</li>
             </ul>
@@ -81,13 +65,13 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">
-                  123 Medical Plaza, Health Street, City 12345
+                  Kalyan East, Thane, Maharashtra 421306
                 </span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  +123-456-7890
+                <a href="tel:+917708987656" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  +91 7708987656
                 </a>
               </li>
               <li className="flex items-center gap-2">
@@ -102,7 +86,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} HealthCare+. All rights reserved. | Privacy Policy | Terms of Service
+            {new Date().getFullYear()} HealthCare+. All rights reserved. | Privacy Policy | Terms of Service
           </p>
         </div>
       </div>
