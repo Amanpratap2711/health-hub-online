@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { useState, useEffect } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -12,6 +12,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 interface Appointment {
   id: string;
@@ -23,62 +24,32 @@ interface Appointment {
   time: string;
   message: string;
   status: "pending" | "completed";
-  bookedAt: Date;
+  bookedAt: string;
 }
 
 const AppointmentHistory = () => {
-  // Sample appointments - in real app this would come from database/API
-  const [appointments, setAppointments] = useState<Appointment[]>([
-    {
-      id: "1703001",
-      name: "राजेश शर्मा",
-      email: "rajesh@example.com",
-      phone: "+91 7708987656",
-      specialty: "General Physician",
-      date: "2024-12-20",
-      time: "10:30",
-      message: "सामान्य स्वास्थ्य जांच",
-      status: "completed",
-      bookedAt: new Date("2024-12-18")
-    },
-    {
-      id: "1703002",
-      name: "प्रिया पाटिल",
-      email: "priya@example.com",
-      phone: "+91 7708987656",
-      specialty: "Cardiologist",
-      date: "2024-12-22",
-      time: "14:00",
-      message: "दिल की जांच",
-      status: "pending",
-      bookedAt: new Date("2024-12-19")
-    },
-    {
-      id: "1703003",
-      name: "अमित कुमार",
-      email: "amit@example.com",
-      phone: "+91 7708987656",
-      specialty: "Orthopedist",
-      date: "2024-12-24",
-      time: "11:00",
-      message: "घुटने में दर्द",
-      status: "pending",
-      bookedAt: new Date("2024-12-20")
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+
+  // Load appointments from localStorage on component mount
+  useEffect(() => {
+    const savedAppointments = localStorage.getItem('appointments');
+    if (savedAppointments) {
+      setAppointments(JSON.parse(savedAppointments));
     }
-  ]);
+  }, []);
 
   const handleCompleteAppointment = (id: string) => {
-    setAppointments(prev => 
-      prev.map(apt => 
-        apt.id === id ? { ...apt, status: "completed" as const } : apt
-      )
+    const updatedAppointments = appointments.map(apt => 
+      apt.id === id ? { ...apt, status: "completed" as const } : apt
     );
-    toast.success("अपॉइंटमेंट पूर्ण हो गई!");
+    setAppointments(updatedAppointments);
+    localStorage.setItem('appointments', JSON.stringify(updatedAppointments));
+    toast.success("Appointment marked as complete!");
   };
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('hi-IN', { 
+    return date.toLocaleDateString('en-IN', { 
       weekday: 'short',
       day: 'numeric', 
       month: 'short', 
@@ -171,7 +142,7 @@ const AppointmentHistory = () => {
                       )}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      #{appointment.id}
+                      #{appointment.id.slice(-6)}
                     </span>
                   </div>
 
@@ -228,9 +199,12 @@ const AppointmentHistory = () => {
             <CardContent>
               <CalendarIcon className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-xl font-semibold mb-2">No Appointments Yet</h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground mb-6">
                 Book an appointment to see your history here
               </p>
+              <Button asChild>
+                <Link to="/appointments">Book Appointment</Link>
+              </Button>
             </CardContent>
           </Card>
         )}

@@ -13,7 +13,7 @@ const Footer = () => {
                 <Heart className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                HealthCare+
+                Healthcare Appointment
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -86,7 +86,7 @@ const Footer = () => {
 
         <div className="border-t border-border mt-8 pt-8 text-center">
           <p className="text-sm text-muted-foreground">
-            {new Date().getFullYear()} HealthCare+. All rights reserved. | Privacy Policy | Terms of Service
+            {new Date().getFullYear()} Healthcare Appointment. All rights reserved. | Privacy Policy | Terms of Service
           </p>
         </div>
       </div>
