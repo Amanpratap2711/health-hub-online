@@ -61,7 +61,7 @@ const About = () => {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-in">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">HealthCare+</span>
+            About <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Healthcare Appointment</span>
           </h1>
           <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
             Your trusted partner in healthcare, committed to providing quality medical services with compassion and expertise.

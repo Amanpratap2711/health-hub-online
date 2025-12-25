@@ -99,6 +99,25 @@ const Appointments = () => {
       return;
     }
 
+    // Create new appointment
+    const newAppointment = {
+      id: Date.now().toString(),
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      specialty: formData.specialty,
+      date: formData.date,
+      time: formData.time,
+      message: formData.message,
+      status: "pending" as const,
+      bookedAt: new Date().toISOString()
+    };
+
+    // Save to localStorage
+    const existingAppointments = JSON.parse(localStorage.getItem('appointments') || '[]');
+    existingAppointments.push(newAppointment);
+    localStorage.setItem('appointments', JSON.stringify(existingAppointments));
+
     toast.success("Appointment booked successfully! We'll send you a confirmation shortly.");
     
     setFormData({
@@ -140,7 +159,7 @@ const Appointments = () => {
                       <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
-                        placeholder="राजेश शर्मा"
+                        placeholder="Enter your name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       />
