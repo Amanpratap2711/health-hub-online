@@ -70,7 +70,7 @@ const Home = () => {
                 Your Health, Our Priority
               </div>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-                Professional Healthcare{" "}
+                Healthcare{" "}
                 <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                   At Your Service
                 </span>
